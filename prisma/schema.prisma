@@ -1,0 +1,77 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Candidate {
+  id          Int      @id @default(autoincrement())
+  name        String
+  title       String
+  region      String   // "1. Bölge", "2. Bölge", "3. Bölge"
+  photoUrl    String
+  bio         String
+  profession  String
+  expertise   String   // Comma separated or string tags
+  isFeatured  Boolean  @default(false)
+  order       Int      @default(0)
+  twitter     String?
+  instagram   String?
+  facebook    String?
+  linkedin    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Project {
+  id            Int      @id @default(autoincrement())
+  title         String
+  category      String   // "Ekonomi", "Ankara Yerel Projeler", "Gençlik", "Tarım", "Sanayi & Ulaşım"
+  summary       String
+  description   String
+  targetAudience String?
+  icon          String?  // Lucide icon identifier
+  isKeyPromise  Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Event {
+  id          Int      @id @default(autoincrement())
+  title       String
+  district    String   // e.g. "Çankaya", "Keçiören", "Yenimahalle", "Mamak", "Etimesgut", "Sincan", "Polatlı"
+  location    String
+  date        DateTime
+  time        String
+  description String
+  speaker     String?
+  type        String   // "Miting", "Esnaf Ziyareti", "Gençlik Buluşması", "Saha Çalışması"
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Volunteer {
+  id        Int      @id @default(autoincrement())
+  fullName  String
+  email     String
+  phone     String
+  district  String
+  interests String
+  note      String?
+  status    String   @default("Yeni") // "Yeni", "İletişime Geçildi", "Aktif Gönüllü"
+  createdAt DateTime @default(now())
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  fullName  String
+  email     String
+  subject   String
+  content   String
+  district  String?
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
