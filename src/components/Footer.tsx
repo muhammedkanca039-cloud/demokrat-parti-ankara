@@ -1,6 +1,24 @@
+/**
+ * src/components/Footer.tsx
+ *
+ * Sitenin alt kısmında (footer) gösterilen bileşen.
+ *
+ * İçerik:
+ * - Marka / logo sütunu: Demokrat Parti Ankara logosu, açıklama metni ve
+ *   sosyal medya ikonları (Facebook, Twitter, Instagram, YouTube).
+ * - Hızlı Bağlantılar: Anasayfa, Adaylarımız, Projeler, Etkinlikler.
+ * - Kurumsal Bağlantılar: Hakkımızda, Tüzük, Genel Merkez, Yönetim Paneli.
+ * - İletişim: Adres, telefon ve e-posta.
+ * - Alt çubuk: Telif hakkı ve seçim mevzuatı uyarısı.
+ */
+
 import Link from 'next/link';
 import { MapPin, Phone, Mail, Star, Facebook, Twitter, Instagram, Youtube, ChevronRight } from 'lucide-react';
 
+/**
+ * Footer navigasyon bağlantıları.
+ * `hizli` — siteye hızlı erişim, `kurumsal` — kurumsal bilgiler.
+ */
 const footerLinks = {
   hizli: [
     { href: '/', label: 'Anasayfa' },
@@ -16,6 +34,7 @@ const footerLinks = {
     { href: '/admin', label: 'Yönetim Paneli' },
   ],
 };
+
 
 export default function Footer() {
   return (

@@ -1,3 +1,16 @@
+/**
+ * src/app/adaylar/page.tsx
+ *
+ * "Adaylarımız" sayfası — Demokrat Parti Ankara milletvekili adaylarını listeler.
+ *
+ * Özellikler:
+ * - Bölge sekmelerine göre filtreleme (1. Bölge / 2. Bölge / 3. Bölge / Tümü).
+ * - Ad, meslek veya uzmanlık alanına göre metin araması.
+ * - Aday kartına tıklandığında detaylı modal pencere açılır (biyografi, sosyal medya).
+ * - Öne çıkarılan (isFeatured) adaylar en üstte görünür.
+ * - API'dan dinamik olarak veri çeker (`/api/candidates`).
+ */
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -8,6 +21,7 @@ import {
   Search, Filter, X, Twitter, Instagram, Facebook, Linkedin,
   Users, MapPin, Award, ChevronRight, Star
 } from 'lucide-react';
+
 
 interface Candidate {
   id: number;

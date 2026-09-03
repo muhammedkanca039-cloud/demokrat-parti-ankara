@@ -1,3 +1,19 @@
+/**
+ * src/app/admin/page.tsx
+ *
+ * Yönetim paneli sayfası — içerik yönetimi için kapsamlı bir yönetim arayüzü.
+ *
+ * Sekmeler:
+ * - Dashboard  : Özet istatistikler (toplam aday, etkinlik, proje, gönüllü, mesaj sayısı).
+ * - Adaylar    : Milletvekili adaylarını görüntüle, ekle, düzenle ve sil.
+ * - Etkinlikler: Saha etkinliklerini görüntüle, ekle, düzenle ve sil.
+ * - Projeler   : Seçim projelerini ve vaatlerini görüntüle, ekle, düzenle ve sil.
+ * - Gönüllüler : Gönüllü kayıtlarını görüntüle; durumlarını güncelle ve sil.
+ * - Mesajlar   : İletişim formundan gelen mesajları görüntüle; okundu işaretle ve sil.
+ *
+ * Tüm veriler ilgili REST API endpoint'lerinden dinamik olarak çekilir.
+ */
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -7,6 +23,7 @@ import {
   Plus, Edit2, Trash2, Eye, Check, X, ChevronRight, Star,
   RefreshCw, ArrowLeft, Bell, Mail, MailOpen
 } from 'lucide-react';
+
 
 // Types
 interface Candidate { id: number; name: string; title: string; region: string; profession: string; isFeatured: boolean; }

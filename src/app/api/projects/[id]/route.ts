@@ -1,6 +1,21 @@
+/**
+ * src/app/api/projects/[id]/route.ts
+ *
+ * Tekil seçim projesi/vaadi için RESTful API endpoint'leri.
+ *
+ * PUT    /api/projects/:id  — Projenin tüm alanlarını günceller.
+ * DELETE /api/projects/:id  — Projeyi veritabanından kalıcı olarak siler.
+ */
+
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 
+/**
+ * PUT /api/projects/:id
+ *
+ * İstek gövdesindeki tüm proje alanlarını günceller.
+ * `isKeyPromise` boolean'a dönüştürülür.
+ */
 export async function PUT(
   request: Request,
   { params }: { params: { id: string } }
@@ -28,6 +43,12 @@ export async function PUT(
   }
 }
 
+/**
+ * DELETE /api/projects/:id
+ *
+ * Projeyi veritabanından kalıcı olarak siler.
+ * Başarılı olduğunda onay mesajı döndürür.
+ */
 export async function DELETE(
   request: Request,
   { params }: { params: { id: string } }

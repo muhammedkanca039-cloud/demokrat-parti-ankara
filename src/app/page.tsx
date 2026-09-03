@@ -1,3 +1,20 @@
+/**
+ * src/app/page.tsx
+ *
+ * Anasayfa (/) — Demokrat Parti Ankara web sitesinin ana giriş sayfası.
+ *
+ * Bölümler:
+ * - Hero         : Tam ekran açılış banneri, slogan ve CTA butonları.
+ * - Öne Çıkan    : Öne çıkarılmış milletvekili adayları carousel/grid gösterimi.
+ * - Projeler     : Ana seçim vaatlerinden öne çıkanların özet listesi.
+ * - Etkinlikler  : Yaklaşan saha etkinlikleri takvimi.
+ * - Gönüllü Formu: Ziyaretçilerin gönüllü olarak kaydolabileceği form.
+ * - İletişim     : Mesaj gönderme formu (iletişim bilgileri ile birlikte).
+ *
+ * Tüm dinamik içerik (adaylar, projeler, etkinlikler) ilgili REST API
+ * endpoint'lerinden çekilir. Gönüllü ve iletişim formları POST isteği gönderir.
+ */
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -11,6 +28,7 @@ import {
   Zap, TrendingUp, Building2, Sprout, Train, HeartHandshake, ArrowRight,
   Phone, Mail, Award, Shield
 } from 'lucide-react';
+
 
 interface Candidate {
   id: number;

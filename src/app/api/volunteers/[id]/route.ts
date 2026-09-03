@@ -1,6 +1,22 @@
+/**
+ * src/app/api/volunteers/[id]/route.ts
+ *
+ * Tekil gönüllü kaydı için RESTful API endpoint'leri.
+ *
+ * PATCH  /api/volunteers/:id  — Gönüllünün durumunu günceller.
+ * DELETE /api/volunteers/:id  — Gönüllü kaydını veritabanından kalıcı olarak siler.
+ */
+
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 
+/**
+ * PATCH /api/volunteers/:id
+ *
+ * Gönüllünün `status` alanını günceller.
+ * Geçerli durum değerleri: "Yeni" | "İletişime Geçildi" | "Aktif Gönüllü"
+ * Yönetim panelinin gönüllü yönetim tablosundan tetiklenir.
+ */
 export async function PATCH(
   request: Request,
   { params }: { params: { id: string } }
@@ -11,7 +27,7 @@ export async function PATCH(
 
     const updated = await db.volunteer.update({
       where: { id },
-      data: { status: body.status },
+      data: { status: body.status }, // Yalnızca durum alanı güncellenir
     });
 
     return NextResponse.json(updated);
@@ -20,6 +36,12 @@ export async function PATCH(
   }
 }
 
+/**
+ * DELETE /api/volunteers/:id
+ *
+ * Gönüllü kaydını veritabanından kalıcı olarak siler.
+ * Başarılı olduğunda onay mesajı döndürür.
+ */
 export async function DELETE(
   request: Request,
   { params }: { params: { id: string } }

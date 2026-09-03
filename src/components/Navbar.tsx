@@ -1,3 +1,16 @@
+/**
+ * src/components/Navbar.tsx
+ *
+ * Sayfanın üst navigasyon çubuğu — tüm sayfalarda kullanılan istemci bileşeni.
+ *
+ * Özellikler:
+ * - Sayfa yukarı kaydırıldığında (scrollY > 20px) arkaplanı donuk lacivert
+ *   renge dönüşür; başlangıçta saydamdır.
+ * - Mobil görünümde sağdan açılan "drawer" menü gösterir.
+ * - Aktif sayfa bağlantısı vurgulanır (pathname ile eşleşme).
+ * - Mobil menü, farklı bir sayfaya geçince otomatik kapanır.
+ */
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -5,6 +18,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X, Star, ChevronRight } from 'lucide-react';
 
+/** Üst navigasyon çubuğunda gösterilecek sayfa bağlantıları */
 const navLinks = [
   { href: '/', label: 'Anasayfa' },
   { href: '/adaylar', label: 'Adaylarımız' },
@@ -12,6 +26,7 @@ const navLinks = [
   { href: '/etkinlikler', label: 'Etkinlik Takvimi' },
   { href: '/#iletisim', label: 'Bize Ulaşın' },
 ];
+
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);

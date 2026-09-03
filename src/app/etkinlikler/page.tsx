@@ -1,3 +1,16 @@
+/**
+ * src/app/etkinlikler/page.tsx
+ *
+ * "Etkinlik Takvimi" sayfası — Demokrat Parti Ankara saha etkinliklerini listeler.
+ *
+ * Özellikler:
+ * - İlçe ve etkinlik türüne göre filtreleme.
+ * - Her etkinlik için tarih, saat, konum ve konuşmacı bilgisi gösterilir.
+ * - Geçmiş etkinlikler soluk gösterilir; gelecek etkinlikler vurgulanır.
+ * - Etkinlik türüne göre renk kodlu rozetler (Miting, Esnaf Ziyareti, vb.).
+ * - API'dan dinamik olarak veri çeker (`/api/events`).
+ */
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -7,6 +20,7 @@ import {
   Calendar, MapPin, Clock, Megaphone, Filter, Search, X,
   Flag, Users, Coffee, Briefcase
 } from 'lucide-react';
+
 
 interface Event {
   id: number;

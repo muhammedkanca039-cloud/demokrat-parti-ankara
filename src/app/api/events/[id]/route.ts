@@ -1,6 +1,21 @@
+/**
+ * src/app/api/events/[id]/route.ts
+ *
+ * Tekil saha etkinliği için RESTful API endpoint'leri.
+ *
+ * PUT    /api/events/:id  — Etkinliğin tüm alanlarını günceller.
+ * DELETE /api/events/:id  — Etkinliği veritabanından kalıcı olarak siler.
+ */
+
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 
+/**
+ * PUT /api/events/:id
+ *
+ * İstek gövdesindeki tüm etkinlik alanlarını günceller.
+ * `date` alanı ISO string olarak alınıp Date nesnesine dönüştürülür.
+ */
 export async function PUT(
   request: Request,
   { params }: { params: { id: string } }
@@ -15,7 +30,7 @@ export async function PUT(
         title: body.title,
         district: body.district,
         location: body.location,
-        date: new Date(body.date),
+        date: new Date(body.date), // ISO string → Date nesnesi
         time: body.time,
         description: body.description,
         speaker: body.speaker,
@@ -29,6 +44,12 @@ export async function PUT(
   }
 }
 
+/**
+ * DELETE /api/events/:id
+ *
+ * Etkinliği veritabanından kalıcı olarak siler.
+ * Başarılı olduğunda onay mesajı döndürür.
+ */
 export async function DELETE(
   request: Request,
   { params }: { params: { id: string } }

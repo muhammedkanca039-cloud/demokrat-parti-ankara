@@ -1,6 +1,24 @@
+/**
+ * src/app/api/candidates/[id]/route.ts
+ *
+ * Tekil milletvekili adayı için RESTful API endpoint'leri.
+ *
+ * GET    /api/candidates/:id  — Belirtilen ID'ye sahip adayı getirir.
+ * PUT    /api/candidates/:id  — Adayın tüm alanlarını günceller.
+ * DELETE /api/candidates/:id  — Adayı veritabanından kalıcı olarak siler.
+ */
+
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 
+/**
+ * GET /api/candidates/:id
+ *
+ * URL parametresi:
+ * - `id` : Adayın veritabanı birincil anahtarı (tam sayı)
+ *
+ * Aday bulunamazsa 404 döndürür.
+ */
 export async function GET(
   request: Request,
   { params }: { params: { id: string } }
@@ -19,6 +37,12 @@ export async function GET(
   }
 }
 
+/**
+ * PUT /api/candidates/:id
+ *
+ * İstek gövdesindeki tüm aday alanlarını günceller.
+ * Sosyal medya alanları boş string olarak da gönderilebilir.
+ */
 export async function PUT(
   request: Request,
   { params }: { params: { id: string } }
@@ -53,6 +77,12 @@ export async function PUT(
   }
 }
 
+/**
+ * DELETE /api/candidates/:id
+ *
+ * Adayı veritabanından kalıcı olarak siler.
+ * Başarılı olduğunda onay mesajı döndürür.
+ */
 export async function DELETE(
   request: Request,
   { params }: { params: { id: string } }

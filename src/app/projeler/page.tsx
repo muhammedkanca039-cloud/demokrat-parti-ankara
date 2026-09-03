@@ -1,3 +1,16 @@
+/**
+ * src/app/projeler/page.tsx
+ *
+ * "Projeler & Vaatler" sayfası — Demokrat Parti Ankara seçim projelerini listeler.
+ *
+ * Özellikler:
+ * - Kategoriye göre filtreleme (Ekonomi, Gençlik, Tarım, Sanayi & Ulaşım, vb.).
+ * - Ana seçim vaatleri (isKeyPromise=true) altın renkli rozet ve ring efektiyle öne çıkar.
+ * - Her proje kartı genişletilebilir; tıklandığında tam açıklama görünür.
+ * - Kategori bazlı renk kodlu ikonlar (Lucide ikon eşleme tablosu).
+ * - API'dan dinamik olarak veri çeker (`/api/projects`).
+ */
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -8,6 +21,7 @@ import {
   TrendingUp, Building2, Sprout, Train, Zap, HeartHandshake, Shield, Award,
   Users
 } from 'lucide-react';
+
 
 interface Project {
   id: number;
