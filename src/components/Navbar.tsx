@@ -10,6 +10,7 @@ const navLinks = [
   { href: '/adaylar', label: 'Adaylarımız' },
   { href: '/projeler', label: 'Projeler & Vaatler' },
   { href: '/etkinlikler', label: 'Etkinlik Takvimi' },
+  { href: '/#iletisim', label: 'Bize Ulaşın' },
 ];
 
 export default function Navbar() {

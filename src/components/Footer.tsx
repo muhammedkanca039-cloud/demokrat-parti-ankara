@@ -7,6 +7,7 @@ const footerLinks = {
     { href: '/adaylar', label: 'Adaylarımız' },
     { href: '/projeler', label: 'Projeler & Vaatler' },
     { href: '/etkinlikler', label: 'Etkinlik Takvimi' },
+    { href: '/#iletisim', label: 'Bize Ulaşın' },
   ],
   kurumsal: [
     { href: '#', label: 'Hakkımızda' },

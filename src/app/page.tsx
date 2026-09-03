@@ -687,6 +687,126 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ===================== CONTACT SECTION ===================== */}
+      <section id="iletisim" className="py-24 bg-dp-navy-mid">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-dp-red/10 border border-dp-red/20 text-dp-red-light text-sm font-medium mb-4">
+              <Mail className="w-4 h-4" />
+              Bize Ulaşın
+            </div>
+            <h2 className="section-title mb-4">Sorunlarınızı <span className="text-gradient">Dinliyoruz</span></h2>
+            <p className="section-subtitle">Ankara'nın sorunlarını biliyoruz, çözümleri birlikte üretiyoruz. Bize yazın.</p>
+            <div className="gold-line w-20 mx-auto mt-6" />
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+            {/* Contact Info */}
+            <div className="space-y-8">
+              <div className="glass-card p-6 flex items-start gap-4 group hover:bg-white/5 transition-colors">
+                <div className="w-12 h-12 rounded-full bg-dp-red/20 flex items-center justify-center shrink-0">
+                  <MapPin className="w-5 h-5 text-dp-red-light" />
+                </div>
+                <div>
+                  <h4 className="font-heading font-bold text-white mb-2">İl Başkanlığı</h4>
+                  <p className="text-white/60 text-sm leading-relaxed">
+                    Kızılay Mah. Mithatpaşa Cad. No:12<br />
+                    Çankaya / Ankara
+                  </p>
+                </div>
+              </div>
+              <div className="glass-card p-6 flex items-start gap-4 group hover:bg-white/5 transition-colors">
+                <div className="w-12 h-12 rounded-full bg-dp-red/20 flex items-center justify-center shrink-0">
+                  <Phone className="w-5 h-5 text-dp-red-light" />
+                </div>
+                <div>
+                  <h4 className="font-heading font-bold text-white mb-2">Telefon</h4>
+                  <p className="text-white/60 text-sm">0312 123 45 67</p>
+                </div>
+              </div>
+              <div className="glass-card p-6 flex items-start gap-4 group hover:bg-white/5 transition-colors">
+                <div className="w-12 h-12 rounded-full bg-dp-red/20 flex items-center justify-center shrink-0">
+                  <Mail className="w-5 h-5 text-dp-red-light" />
+                </div>
+                <div>
+                  <h4 className="font-heading font-bold text-white mb-2">E-posta</h4>
+                  <p className="text-white/60 text-sm">ankara@demokratparti.org.tr</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Contact Form */}
+            <div className="glass-card p-8">
+              <h3 className="font-heading font-bold text-white text-2xl mb-6">Mesaj Gönderin</h3>
+              <form id="contact-form" onSubmit={async (e) => {
+                e.preventDefault();
+                const form = e.target as HTMLFormElement;
+                const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+                const originalText = btn.innerHTML;
+                btn.disabled = true;
+                btn.innerHTML = 'Gönderiliyor...';
+                
+                try {
+                  const res = await fetch('/api/messages', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                      fullName: (form.elements.namedItem('fullName') as HTMLInputElement).value,
+                      email: (form.elements.namedItem('email') as HTMLInputElement).value,
+                      subject: (form.elements.namedItem('subject') as HTMLInputElement).value,
+                      district: (form.elements.namedItem('district') as HTMLSelectElement).value,
+                      content: (form.elements.namedItem('content') as HTMLTextAreaElement).value,
+                    })
+                  });
+                  if (res.ok) {
+                    alert('Mesajınız başarıyla gönderildi!');
+                    form.reset();
+                  } else {
+                    alert('Bir hata oluştu, lütfen tekrar deneyin.');
+                  }
+                } catch {
+                  alert('Bir hata oluştu, lütfen tekrar deneyin.');
+                }
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+              }} className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-white/70 text-xs mb-1.5 block">Ad Soyad *</label>
+                    <input name="fullName" type="text" required placeholder="Adınız Soyadınız" className="input-field" />
+                  </div>
+                  <div>
+                    <label className="text-white/70 text-xs mb-1.5 block">E-posta *</label>
+                    <input name="email" type="email" required placeholder="E-posta adresiniz" className="input-field" />
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-white/70 text-xs mb-1.5 block">Konu *</label>
+                    <input name="subject" type="text" required placeholder="Mesajınızın konusu" className="input-field" />
+                  </div>
+                  <div>
+                    <label className="text-white/70 text-xs mb-1.5 block">İlçe</label>
+                    <select name="district" className="select-field">
+                      <option value="">İlçe seçin...</option>
+                      {districts.map(d => <option key={d} value={d}>{d}</option>)}
+                    </select>
+                  </div>
+                </div>
+                <div>
+                  <label className="text-white/70 text-xs mb-1.5 block">Mesajınız *</label>
+                  <textarea name="content" required rows={4} placeholder="Bize iletmek istediğiniz mesaj..." className="input-field resize-none" />
+                </div>
+                <button type="submit" className="btn-primary w-full flex items-center justify-center gap-2">
+                  <Mail className="w-4 h-4" />
+                  <span>Mesajı Gönder</span>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <Footer />
 
       {/* Candidate Modal */}

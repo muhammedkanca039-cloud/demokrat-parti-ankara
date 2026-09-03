@@ -35,6 +35,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json(volunteer, { status: 201 });
   } catch (error) {
-    return NextResponse.json({ error: 'Gönüllü kaydı oluşturulamadı.' }, { status: 500 });
+    console.error('VOLUNTEER POST ERROR:', error);
+    return NextResponse.json({ error: 'Gönüllü kaydı oluşturulamadı.', details: String(error) }, { status: 500 });
   }
 }

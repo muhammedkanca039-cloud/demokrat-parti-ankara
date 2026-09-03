@@ -6,7 +6,8 @@ function resolveDatabaseUrl(): string {
   const isVercel = process.env.VERCEL === '1';
 
   if (!isVercel) {
-    return process.env.DATABASE_URL ?? 'file:./dev.db';
+    // In local dev, point directly to the prisma/dev.db using an absolute path
+    return `file:${path.join(process.cwd(), 'prisma', 'dev.db')}`;
   }
 
   const tmpDbPath = '/tmp/dev.db';
